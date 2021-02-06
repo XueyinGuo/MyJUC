@@ -16,7 +16,11 @@ public class L07_Synchronized_This {
         System.out.println(Thread.currentThread().getName() + " count = " + count);
     }
 
-    public void n() { //访问这个方法的时候不需要上锁
-        count++;
+    public void m2() {
+        synchronized(this) { //任何线程要执行下面的代码，必须先拿到this的锁
+            count--;
+            System.out.println(Thread.currentThread().getName() + " count = " + count);
+        }
     }
+
 }
