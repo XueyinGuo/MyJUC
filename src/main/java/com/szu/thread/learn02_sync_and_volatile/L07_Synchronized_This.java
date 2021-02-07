@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn02_sync_and_volatile;
 /*
 * Synchronized 是 怎么实现的呢？
 *

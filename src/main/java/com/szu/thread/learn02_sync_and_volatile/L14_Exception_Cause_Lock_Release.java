@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn02_sync_and_volatile;
 /*
  * @Author 郭学胤
  * @University 深圳大学

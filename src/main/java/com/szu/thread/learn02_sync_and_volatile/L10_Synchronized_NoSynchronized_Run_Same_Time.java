@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn02_sync_and_volatile;
 
 public class L10_Synchronized_NoSynchronized_Run_Same_Time {
 

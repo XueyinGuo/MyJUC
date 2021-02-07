@@ -32,3 +32,15 @@ https://blog.csdn.net/XueyinGuo/article/details/110913371
 指令重排序的影响下会可能导致 步骤2与步骤3 颠倒，导致instance中的属性值都是默认值，从而导致很罕见的程序错误
 
 # 5. `volatile`是如何保证不会指令重排序的
+
+
+# 6. CAS 的 ABA 问题
+
+### AtomicStampedReference
++ An AtomicStampedReference maintains an object reference
+along with an integer "stamp", that can be updated atomically.
+
++  Atomically sets the value of both the reference and stamp
+     to the given update values if the
+     current reference is == to the expected reference 
+   and the current stamp is equal to the expected stamp.

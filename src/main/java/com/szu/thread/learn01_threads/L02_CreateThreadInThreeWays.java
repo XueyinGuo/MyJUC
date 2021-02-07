@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn01_threads;
 /*
 * 创建线程的三种方式
 * 1.继承Thread

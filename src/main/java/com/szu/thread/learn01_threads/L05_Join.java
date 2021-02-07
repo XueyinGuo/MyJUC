@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn01_threads;
 /*
 * t1线程中调用 t2.join()
 *

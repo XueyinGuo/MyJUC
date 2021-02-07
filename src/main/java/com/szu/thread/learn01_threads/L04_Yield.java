@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn01_threads;
 
 public class L04_Yield {
     static void testYield(){

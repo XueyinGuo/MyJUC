@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn02_sync_and_volatile;
 /*
 * Thread 模拟营业大厅叫号机程序
 *

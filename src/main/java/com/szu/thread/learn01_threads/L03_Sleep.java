@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn01_threads;
 
 import java.util.concurrent.TimeUnit;
 
