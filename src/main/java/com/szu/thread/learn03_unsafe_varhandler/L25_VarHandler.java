@@ -1,4 +1,4 @@
-package com.szu.thread;
+package com.szu.thread.learn03_unsafe_varhandler;
 /*
  * @Author 郭学胤
  * @University 深圳大学
