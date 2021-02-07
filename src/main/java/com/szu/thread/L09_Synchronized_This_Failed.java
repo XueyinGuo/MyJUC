@@ -27,7 +27,7 @@ public class L09_Synchronized_This_Failed extends  Thread{
     }
 
     @Override
-    public synchronized void run() {
+    public void run() {
         print();
     }
 

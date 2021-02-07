@@ -10,7 +10,9 @@ package com.szu.thread;
 public class L07_Synchronized_This {
 
     private int count = 10;
-
+    /*
+    * 这种情况下应该注意锁力度的粗化和细化问题
+    * */
     public synchronized void m() { //等同于在方法的代码执行时要synchronized(this)
         count--;
         System.out.println(Thread.currentThread().getName() + " count = " + count);
