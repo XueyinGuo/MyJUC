@@ -44,3 +44,52 @@ along with an integer "stamp", that can be updated atomically.
      to the given update values if the
      current reference is == to the expected reference 
    and the current stamp is equal to the expected stamp.
+
+
+# 7. LongAdder 
+### 使用了分段锁
+
+# 8. `ReentrantLock`
++ ##  需要注意的是，【必须要】手动释放锁，手动调用 `lock()` 和 `unlock()` 方法。
++ ## 使用`synchronized`锁定的话如果遇到异常，JVM会自动释放锁，但是`ReentrantLock`必须手动释放锁，因此经常在`finally`中进行锁的释放
+### 8.1 可重入性
++ 同一个线程执行一个方法的时候，可以调用另外同一个`ReentrantLock`对象锁定的方法（这么说好像不严谨）
+```java
+public class L28_ReentrantLock {
+    ReentrantLock lock = new ReentrantLock();
+
+    public void l1() {
+        try {
+            int i = 0;
+            lock.lock();
+            while (i < 10) {
+                if (i == 5) l2();
+            }
+        }finally {
+            /* 解锁一定写在这里 */
+            lock.unlock();
+        }
+    }
+
+    public void l2() {
+        try {
+            lock.lock();
+        }finally {
+            /* 解锁一定写在这里 */
+            lock.unlock();
+        }
+    }
+}
+```
+### 8.2 `tryLock()`
++ #### 使用`ReentrantLock`可以进行“尝试锁定”`tryLock()`，这样无法锁定，或者在指定时间内无法锁定，线程可以决定是否继续等待
+```java
+lock.tryLock();
+// 三秒之内拿不到锁就抛出异常
+lock.tryLock(3, TimeUnit.SECONDS);
+```
+### 8.3 `lockInterruptibly()`
++ #### `lockInterruptibly()`方法，可以对线程`interrupt()`方法做出响应， 在一个线程等待锁的过程中，可以被打断
+
+### 8.4 公平锁与非公平锁
++ #### 每次线程来争抢锁的时候，先判断等待队列有没有其他线程在wait，如果有把自己加到等待队列队尾，如果没有直接开始拿锁
