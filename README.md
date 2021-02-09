@@ -93,3 +93,6 @@ lock.tryLock(3, TimeUnit.SECONDS);
 
 ### 8.4 公平锁与非公平锁
 + #### 每次线程来争抢锁的时候，先判断等待队列有没有其他线程在wait，如果有把自己加到等待队列队尾，如果没有直接开始拿锁
+
+# 9. LockSupport
+### 9.1 park unpark 如何实现

@@ -1,4 +1,5 @@
-package com.szu.thread.learn11_semaphore_exchanger;/*
+package com.szu.thread.learn11_semaphore_exchanger;
+/*
  * @Author 郭学胤
  * @University 深圳大学
  * @Description
