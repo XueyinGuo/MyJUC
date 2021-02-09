@@ -50,8 +50,8 @@ along with an integer "stamp", that can be updated atomically.
 ### 使用了分段锁
 
 # 8. `ReentrantLock`
-+ ##  需要注意的是，【必须要】手动释放锁，手动调用 `lock()` 和 `unlock()` 方法。
-+ ## 使用`synchronized`锁定的话如果遇到异常，JVM会自动释放锁，但是`ReentrantLock`必须手动释放锁，因此经常在`finally`中进行锁的释放
++ ####  需要注意的是，【必须要】手动释放锁，手动调用 `lock()` 和 `unlock()` 方法。
++ #### 使用`synchronized`锁定的话如果遇到异常，JVM会自动释放锁，但是`ReentrantLock`必须手动释放锁，因此经常在`finally`中进行锁的释放
 ### 8.1 可重入性
 + 同一个线程执行一个方法的时候，可以调用另外同一个`ReentrantLock`对象锁定的方法（这么说好像不严谨）
 ```java
@@ -96,3 +96,13 @@ lock.tryLock(3, TimeUnit.SECONDS);
 
 # 9. LockSupport
 ### 9.1 park unpark 如何实现
+
+# 10. AQS源码
+
+### 10.1 CAS操作 + volatile变量
++ ##### 对一个内部类`Node`进行CAS操作
+### 10.2 `ReentrantLock`如何使用的这两个核心变量
++ ##### 可重入
++ ##### 公平与非公平
+    + ###### 公平锁中线程状态的更新
+        先查看pre节点的状态值 bulabula
