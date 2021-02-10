@@ -69,9 +69,11 @@ public class AddToContainerAndQuit_III_CountDownLatch {
             }
         };
 
-        Thread t1 = new Thread(writeTask);
-        Thread t2 = new Thread(readTask);
-        t1.start();
+        Thread t1 = new Thread(writeTask, "addThread");
+        Thread t2 = new Thread(readTask, "getThread");
         t2.start();
+        Thread.sleep(1000);
+        t1.start();
+
     }
 }

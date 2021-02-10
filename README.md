@@ -97,12 +97,251 @@ lock.tryLock(3, TimeUnit.SECONDS);
 # 9. LockSupport
 ### 9.1 park unpark 如何实现
 
-# 10. AQS源码
+# 10. AQS源码阅读
+带图版本请见 https://blog.csdn.net/XueyinGuo/article/details/113785283
+### 
 
-### 10.1 CAS操作 + volatile变量
-+ ##### 对一个内部类`Node`进行CAS操作
-### 10.2 `ReentrantLock`如何使用的这两个核心变量
-+ ##### 可重入
-+ ##### 公平与非公平
-    + ###### 公平锁中线程状态的更新
-        先查看pre节点的状态值 bulabula
+## 10.1 AQS简介
+
+**`AbstractQueuedSynchronizer`**简称AQS，是实现JUC包中各种锁的关键，此类是一个模板类，具体的`ReentrantLock`、`CountDownLatch`、`ReadWriteLock`等等都是自己去实现里边变量的使用规则。
+
+
+
+各种类型的锁都有自己的锁类型信息
+
++ 比如`ReadWriteLock`就肯定会有当前的锁状态是读锁模式还是写锁模式
+
+  ```java
+  static final Node SHARED = new Node(); // 当前锁状态是 共享锁（读锁）模式
+  static final Node EXCLUSIVE = null;    // 当前锁状态是 排它锁（写锁）模式
+  ```
+
+这些所有的信息加上线程本身被封装成一个内部类对象 **Node**
+
+每个Node都有指向前驱节点和后继节点的指针，每个节点将有关线程的某些控制信息保存在其节点的前身中。
+
+> 意思是说前一个节点变成什么样的时候，我自己变成什么样。具体例子就是：当时一个==**公平锁**==状态的时候，每个节点都在等排号，当前一个节点时头结点的时候，而且头结点已经准备释放锁了，我需要把我自己节点持有的线程notify一下或者unpark一下。
+
+
+
+前驱根据自己状态发出信号，后继节点做出相应的操作。
+
+当锁是==**非公平锁**==的时候，线程们会尝试抢夺锁资源，即使一个节点是在队列中的第一个也并不能保证成功抢夺到锁。
+
+
+
+
+
+
+
+## 10.2 AQS内部类详解
+
+### 10.2.1 Node
+
++ 用作等待队列
+
+```java
+static final class Node {
+    static final Node SHARED = new Node(); // 当前锁状态是 共享锁（读锁）模式
+    static final Node EXCLUSIVE = null;    // 当前锁状态是 排它锁（写锁）模式
+	
+    static final int CANCELLED =  1;		// 表示线程被取消（执行过interrupt()方法或者 timeout ）
+    
+    static final int SIGNAL    = -1;		// 等待队列中 此线程后边的节点需要被 notify()、或者 LockSupport.unpark()【公平锁？】
+    
+    static final int CONDITION = -2;		// 此线程在一个 condition 等待队列中
+    
+    static final int PROPAGATE = -3;   		// 我理解是相当于执行 notifyAll()方法的，但是只有头结点是这个状态，当头结点这样时候所有队列中的节											// 点都会去在头结点释放锁之后抢锁 【非公平锁？】
+    										// 或者当前线程处于 【condition】 等待队列中的时候，当condition队列的头结点被叫醒的时候，传播给												//当前所有的等待队列中的节点都被唤醒去争抢锁资源
+	
+    /* 存储一个上边的某一个值，表示当前节点的状态 */
+    volatile int waitStatus;
+
+    // 当前节点的前一个节点，用来监视前一个节点的状态（如果前一个节点被取消，自己连接到前一个节点的前一个节点）
+    volatile Node prev;
+
+    // 当前节点的后一个节点，当这个节点当做头结点释放锁的时候，通知下一个节点
+    volatile Node next;
+
+    // 节点中保存的 线程
+    volatile Thread thread;
+
+    // 指向一个 condition等待队列
+    Node nextWaiter;
+}
+```
+
+### 10.2.2 ConditionObject
+
++ ##### `new ReentrantLock().newCondition()`创建的对象
+
+```java
+public class ConditionObject implements Condition, java.io.Serializable {
+        // condition等待队列的第一个节点
+        private transient Node firstWaiter;
+       	// condition等待队列的最后一个节点
+        private transient Node lastWaiter;
+}
+```
+
+
+
+
+
+## 10.3 AQS类变量详解
+
+```java
+// 表示锁当前的状态，初始为0， ReentrantLock.lock()之后数字加1，表示已经上锁
+private volatile int state;
+// 等待队列的头结点（head节点初始化的时候，waitStatus会被赋值为0）
+private transient volatile Node head;
+// 等待队列的尾巴节点
+private transient volatile Node tail;
+
+// 通过 VarHander 直接获取上边三个变量的地址，直接使用变量地址来进行CAS操作
+private static final VarHandle STATE;
+private static final VarHandle HEAD;
+private static final VarHandle TAIL;
+static {
+    try {
+         /* handle 绑定到一个了个类的属性上，通过位于类的类型，变量的名字 和 变量本身的类型 */
+        MethodHandles.Lookup l = MethodHandles.lookup();
+        STATE = l.findVarHandle(AbstractQueuedSynchronizer.class, "state", int.class);
+        HEAD = l.findVarHandle(AbstractQueuedSynchronizer.class, "head", Node.class);
+        TAIL = l.findVarHandle(AbstractQueuedSynchronizer.class, "tail", Node.class);
+    } catch (ReflectiveOperationException e) {
+        throw new ExceptionInInitializerError(e);
+    }
+}
+```
+
+
+
+## 10.4 插入到AQS队列
+
+插入到AQS队列中只需要对当前的tail节点执行一次**CAS操作**
+
+`prev`主要用于处理线程取消（线程超时或者被打断）的情况。如果取消某个节点，则其后继节点（通常）会重新链接到未取消的前任节点。
+
+加入队列就是原子操作更新`tail`节点的`next`对象
+
+
+
+
+
+# 11`ReentrantLock`与`AQS`
+
+
+
+## 11.1 `lock()`
+
+### 获得锁
+
+CAS更改`state`的值，如果当前为0，`线程1`给他加到了1，表示`线程1`抢到了这把锁，其余线程进入等待队列，CAS更新`tail`节点的`next`指针
+
+### 可重入
+
+可重入实现为给`state`属性值往上加1
+
+### 公平性
+
+只有`state`属性再次为0的时候表示`线程1`彻底释放了锁资源，就可以通过上述过程来选择
+
++ **非公平**：广播消息激活所有线程争抢锁资源
+
++ **公平**：只把`head`节点的`next`指向的节点激活
+
+## 11.2 `trylock()`
+
+尝试获取锁，获取不到锁或者过了超时时间就把自己设置为取消状态，并且更新前后节点的指向关系
+
+`curNode.next.pre = curNode.pre`
+
+`curNode.pre.next = curNode.next`
+
+## 11.3 `lockInterruptibly()`
+
+节点中线程可以被打断，打断之后的线程也设置为取消状态，并且更新节点的指向关系
+
+
+
+
+
+# 12. `CountDownLatch`与`AQS`
+
+**state为门栓，当门栓为0时，表示线程不用被阻塞可以继续运行。**
+
+
+
+
+## 12.1 `await()`
+
++ 获取state是否为0，为0则可以直接继续执行，不用阻塞当前线程
+
++ 如果获取到当前门栓值大于0，阻塞当前线程
+
+    + 创建一个共享锁模式的Node，用CAS操作添加到等待队列队尾
+
+    + 调用`LockSupport.park()`阻塞线程
+    + 更新等待队列的头结点为刚刚创建的节点，并把头结点的`waitStatus`设置为广播模式
+
+## 12.2 `countDown()`
+
++ CAS操作更新`state`的值，因为值大于0导致其他线程阻塞，所以在每次调用 `state--`
+
++ 当最后把`state`更新为0的时候，`unparkSuccessor`，解除头结点封印，又因为`await()`时候头结点的模式为广播模式，所以一旦头结点执行，所有的等待队列中的线程均可以激活
+
+
+
+
+
+# 13. `ReentrantReadWriteLock`与AQS
+
+
+## 13.1 `readLock.lock()`
+
+### 获取state的值,查看有无排它锁
+
+#### 有排它锁
+
++ 创建一个节点用CAS操作添加到等待队列末尾
++ 调用`LockSupport.park()`阻塞线程
++ 更新等待队列的头结点为刚刚创建的节点，并把头结点的`waitStatus`设置为广播模式
+
+#### 无排它锁
+
++ 共享锁数量+1，继续执行代码
+
+## 13.2 `readLock.unlock()`
+
++ 普通读线程执行的之后，把state数量减-1
+
++ 最后一个读线程退出的时候，激活等待队列中的线程（此时队列中全是写线程，公平读写锁的话就激活第一个，非公平就激活全部）
+
+## 13.3 `writeLock.lock()`
+
+#### 没有读线程 + 无读线程
+
+`setExclusiveOwnerThread`为自己
+
+#### 有其他读线程
+
+把自己加入到等待队列中，并且锁模式设置为排它锁
+
+
+
+## 13.4 `writeLock.unlock()`
+
+`setExclusiveOwnerThread`为`null`，更新`state`数值
+
+
+
+
+
+# 14. Varhandle
+
++ 获取到普通属性变量地址之后进行原子操作
++ 比反射快，直接操纵二进制码
+
+
+
