@@ -99,8 +99,7 @@ lock.tryLock(3, TimeUnit.SECONDS);
 
 # 10. AQS源码阅读
 带图版本请见 https://blog.csdn.net/XueyinGuo/article/details/113785283
-### 
-
+  
 ## 10.1 AQS简介
 
 **`AbstractQueuedSynchronizer`**简称AQS，是实现JUC包中各种锁的关键，此类是一个模板类，具体的`ReentrantLock`、`CountDownLatch`、`ReadWriteLock`等等都是自己去实现里边变量的使用规则。
@@ -344,4 +343,8 @@ CAS更改`state`的值，如果当前为0，`线程1`给他加到了1，表示`�
 + 比反射快，直接操纵二进制码
 
 
+
+# 15. ThreadLocal
+###### 详情请见本人博客
+https://blog.csdn.net/XueyinGuo/article/details/113797156
 
