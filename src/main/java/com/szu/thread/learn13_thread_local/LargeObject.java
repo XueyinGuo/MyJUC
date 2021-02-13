@@ -11,6 +11,6 @@ public class LargeObject {
 
     @Override
     protected void finalize() throws Throwable {
-        System.out.println("回收旧手机");
+        System.out.println("finalize largeObject");
     }
 }

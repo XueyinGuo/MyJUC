@@ -34,12 +34,9 @@ public class L42_PhantomReference {
     private static final ReferenceQueue<M> QUEUE = new ReferenceQueue<>();
 
 
-
     public static void main(String[] args) {
 
-
         PhantomReference<M> phantomReference = new PhantomReference<>(new M(), QUEUE);
-
 
         new Thread(() -> {
             while (true) {

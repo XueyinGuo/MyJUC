@@ -195,7 +195,7 @@ private volatile int state;
 // 等待队列的头结点（head节点初始化的时候，waitStatus会被赋值为0）
 private transient volatile Node head;
 // 等待队列的尾巴节点
-private transient volatile Node tail;
+private transient volatile Node tail; 
 
 // 通过 VarHander 直接获取上边三个变量的地址，直接使用变量地址来进行CAS操作
 private static final VarHandle STATE;
@@ -340,7 +340,7 @@ CAS更改`state`的值，如果当前为0，`线程1`给他加到了1，表示`�
 # 14. Varhandle
 
 + 获取到普通属性变量地址之后进行原子操作
-+ 比反射快，直接操纵二进制码
++ 比反射快
 
 
 
@@ -348,3 +348,6 @@ CAS更改`state`的值，如果当前为0，`线程1`给他加到了1，表示`�
 ###### 详情请见本人博客
 https://blog.csdn.net/XueyinGuo/article/details/113797156
 
+# 16. 容器
+## Vector Hashtable
+自带锁，现在基本不用
