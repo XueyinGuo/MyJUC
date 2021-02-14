@@ -1,4 +1,4 @@
-package com.szu.thread.learn50_interview;
+package com.szu.thread.learn50_interview.quit_till_5;
 /*
  * @Author 郭学胤
  * @University 深圳大学

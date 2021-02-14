@@ -1,4 +1,4 @@
-package com.szu.thread.learn50_interview;
+package com.szu.thread.learn50_interview.quit_till_5;
 /*
  * @Author 郭学胤
  * @University 深圳大学
@@ -12,7 +12,6 @@ package com.szu.thread.learn50_interview;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class AddToContainerAndQuit_II_wait_notify {
 

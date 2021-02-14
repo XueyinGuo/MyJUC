@@ -73,6 +73,12 @@
       <point x="431.54166666666663" y="83.0" />
       <point x="-8.333333333333371" y="16.5" />
     </edge>
+    <edge source="java.util.TreeMap" target="java.util.AbstractMap">
+      <point x="27.75" y="-16.5" />
+      <point x="205.5" y="166.0" />
+      <point x="547.3796296296296" y="166.0" />
+      <point x="-61.25" y="16.5" />
+    </edge>
     <edge source="java.util.LinkedHashMap" target="java.util.Map">
       <point x="-41.25" y="-16.5" />
       <point x="175.77777777777777" y="274.0" />
@@ -80,12 +86,6 @@
       <point x="0.0" y="53.0" />
       <point x="406.54166666666663" y="53.0" />
       <point x="-33.33333333333337" y="16.5" />
-    </edge>
-    <edge source="java.util.TreeMap" target="java.util.AbstractMap">
-      <point x="27.75" y="-16.5" />
-      <point x="205.5" y="166.0" />
-      <point x="547.3796296296296" y="166.0" />
-      <point x="-61.25" y="16.5" />
     </edge>
     <edge source="java.util.concurrent.ConcurrentSkipListMap" target="java.util.Map">
       <point x="79.0" y="-16.5" />
@@ -132,7 +132,7 @@
       <point x="61.25" y="16.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="550.5" y="130.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="606.5" y="166.0" />
   <SelectedNodes>
     <node>java.util.Map</node>
   </SelectedNodes>

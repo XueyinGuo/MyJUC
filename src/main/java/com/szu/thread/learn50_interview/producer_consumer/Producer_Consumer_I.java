@@ -1,4 +1,4 @@
-package com.szu.thread.learn50_interview;/*
+package com.szu.thread.learn50_interview.producer_consumer;/*
  * @Author 郭学胤
  * @University 深圳大学
  * @Description
@@ -7,7 +7,6 @@ package com.szu.thread.learn50_interview;/*
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class Producer_Consumer_I {
     static int MAX = 30;
