@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>java.util.Collection</OriginalElement>
+  <nodes>
+    <node x="469.63095238095246" y="166.0">java.util.List</node>
+    <node x="66.85000000000002" y="166.0">java.util.AbstractCollection</node>
+    <node x="165.50595238095246" y="362.0">java.util.Vector</node>
+    <node x="317.13095238095246" y="83.0">java.util.Collection</node>
+    <node x="221.63095238095246" y="269.0">java.util.AbstractList</node>
+    <node x="7.505952380952465" y="362.0">java.util.LinkedList</node>
+    <node x="599.6" y="362.0">sun.awt.util.IdentityArrayList</node>
+    <node x="820.6" y="362.0">sun.awt.util.IdentityLinkedList</node>
+    <node x="170.00595238095246" y="445.0">java.util.Stack</node>
+    <node x="326.13095238095246" y="0.0">java.lang.Iterable</node>
+    <node x="397.63095238095246" y="269.0">java.util.concurrent.CopyOnWriteArrayList</node>
+    <node x="418.73690476190484" y="362.0">java.util.ArrayList</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="java.util.Vector" target="java.util.AbstractList">
+      <point x="25.5" y="-16.5" />
+      <point x="242.00595238095246" y="342.0" />
+      <point x="268.4309523809525" y="342.0" />
+      <point x="-31.19999999999999" y="16.5" />
+    </edge>
+    <edge source="java.util.LinkedList" target="java.util.AbstractList">
+      <point x="46.0" y="-16.5" />
+      <point x="122.50595238095246" y="332.0" />
+      <point x="237.2309523809525" y="332.0" />
+      <point x="-62.39999999999998" y="16.5" />
+    </edge>
+    <edge source="java.util.concurrent.CopyOnWriteArrayList" target="java.util.List">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="java.util.Vector" target="java.util.List">
+      <point x="-25.5" y="-16.5" />
+      <point x="191.00595238095246" y="239.0" />
+      <point x="487.63095238095246" y="239.0" />
+      <point x="-24.0" y="16.5" />
+    </edge>
+    <edge source="sun.awt.util.IdentityLinkedList" target="java.util.Collection">
+      <point x="70.0" y="-16.5" />
+      <point x="995.6" y="342.0" />
+      <point x="947.4869047619048" y="342.0" />
+      <point x="947.4869047619048" y="136.0" />
+      <point x="437.88095238095246" y="136.0" />
+      <point x="51.75" y="16.5" />
+    </edge>
+    <edge source="java.util.Stack" target="java.util.Vector">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="sun.awt.util.IdentityLinkedList" target="java.util.AbstractList">
+      <point x="-70.0" y="-16.5" />
+      <point x="855.6" y="322.0" />
+      <point x="362.03095238095244" y="322.0" />
+      <point x="62.39999999999998" y="16.5" />
+    </edge>
+    <edge source="java.util.LinkedList" target="java.util.List">
+      <point x="0.0" y="-16.5" />
+      <point x="76.50595238095246" y="342.0" />
+      <point x="59.005952380952465" y="342.0" />
+      <point x="59.005952380952465" y="229.0" />
+      <point x="475.63095238095246" y="229.0" />
+      <point x="-36.0" y="16.5" />
+    </edge>
+    <edge source="java.util.AbstractList" target="java.util.AbstractCollection">
+      <point x="-39.0" y="-16.5" />
+      <point x="260.63095238095246" y="219.0" />
+      <point x="171.85000000000002" y="219.0" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="sun.awt.util.IdentityArrayList" target="java.util.List">
+      <point x="50.24999999999997" y="-16.5" />
+      <point x="750.35" y="239.0" />
+      <point x="535.6309523809525" y="239.0" />
+      <point x="24.0" y="16.5" />
+    </edge>
+    <edge source="sun.awt.util.IdentityArrayList" target="java.util.AbstractList">
+      <point x="-50.25" y="-16.5" />
+      <point x="649.85" y="332.0" />
+      <point x="330.83095238095245" y="332.0" />
+      <point x="31.19999999999999" y="16.5" />
+    </edge>
+    <edge source="sun.awt.util.IdentityLinkedList" target="java.util.List">
+      <point x="0.0" y="-16.5" />
+      <point x="925.6" y="342.0" />
+      <point x="933.7369047619048" y="342.0" />
+      <point x="933.7369047619048" y="229.0" />
+      <point x="547.6309523809525" y="229.0" />
+      <point x="36.0" y="16.5" />
+    </edge>
+    <edge source="java.util.List" target="java.util.Collection">
+      <point x="0.0" y="-16.5" />
+      <point x="511.63095238095246" y="146.0" />
+      <point x="403.38095238095246" y="146.0" />
+      <point x="17.25" y="16.5" />
+    </edge>
+    <edge source="java.util.AbstractList" target="java.util.List">
+      <point x="39.0" y="-16.5" />
+      <point x="338.63095238095246" y="249.0" />
+      <point x="499.63095238095246" y="249.0" />
+      <point x="-12.0" y="16.5" />
+    </edge>
+    <edge source="java.util.Collection" target="java.lang.Iterable">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="java.util.LinkedList" target="java.util.Collection">
+      <point x="-46.0" y="-16.5" />
+      <point x="30.505952380952465" y="342.0" />
+      <point x="0.0" y="342.0" />
+      <point x="0.0" y="136.0" />
+      <point x="334.38095238095246" y="136.0" />
+      <point x="-51.75" y="16.5" />
+    </edge>
+    <edge source="java.util.ArrayList" target="java.util.List">
+      <point x="32.25" y="-16.5" />
+      <point x="515.4869047619048" y="342.0" />
+      <point x="636.1309523809525" y="342.0" />
+      <point x="636.1309523809525" y="249.0" />
+      <point x="523.6309523809525" y="249.0" />
+      <point x="12.0" y="16.5" />
+    </edge>
+    <edge source="java.util.ArrayList" target="java.util.AbstractList">
+      <point x="-32.25" y="-16.5" />
+      <point x="450.98690476190484" y="342.0" />
+      <point x="299.63095238095246" y="342.0" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="java.util.AbstractCollection" target="java.util.Collection">
+      <point x="0.0" y="-16.5" />
+      <point x="171.85000000000002" y="146.0" />
+      <point x="368.88095238095246" y="146.0" />
+      <point x="-17.25" y="16.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="308.5" y="219.0" />
+  <SelectedNodes>
+    <node>sun.awt.util.IdentityArrayList</node>
+  </SelectedNodes>
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

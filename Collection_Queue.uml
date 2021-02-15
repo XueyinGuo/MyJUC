@@ -5,8 +5,8 @@
   <nodes>
     <node x="10.5" y="206.0">com.sun.jmx.remote.internal.ArrayQueue</node>
     <node x="1772.9698581560283" y="515.0">java.util.concurrent.LinkedTransferQueue</node>
-    <node x="1140.5" y="432.0">java.util.concurrent.BlockingDeque</node>
     <node x="698.5" y="432.0">java.util.concurrent.SynchronousQueue</node>
+    <node x="1140.5" y="432.0">java.util.concurrent.BlockingDeque</node>
     <node x="637.9375" y="83.0">java.util.Collection</node>
     <node x="1238.0948581560283" y="319.0">java.util.concurrent.BlockingQueue</node>
     <node x="1325.5" y="432.0">java.util.concurrent.TransferQueue</node>
@@ -251,7 +251,7 @@
       <point x="-40.25" y="16.5" />
     </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="0.6424021838034577" x="1089.0" y="274.0" />
+  <settings layout="Hierarchic Group" zoom="0.6719745222929936" x="1089.0" y="274.0" />
   <SelectedNodes>
     <node>com.sun.jmx.remote.internal.ArrayQueue</node>
   </SelectedNodes>

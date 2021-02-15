@@ -4,8 +4,8 @@
   <OriginalElement>java.util.Map</OriginalElement>
   <nodes>
     <node x="134.52777777777777" y="299.0">java.util.LinkedHashMap</node>
-    <node x="975.25" y="216.0">java.util.concurrent.ConcurrentSkipListMap</node>
     <node x="535.1296296296296" y="103.0">java.util.AbstractMap</node>
+    <node x="975.25" y="216.0">java.util.concurrent.ConcurrentSkipListMap</node>
     <node x="551.25" y="216.0">java.util.IdentityHashMap</node>
     <node x="122.25" y="216.0">java.util.TreeMap</node>
     <node x="402.375" y="0.0">java.util.Map</node>
