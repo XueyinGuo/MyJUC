@@ -3,8 +3,8 @@
   <ID>JAVA</ID>
   <OriginalElement>java.util.Collection</OriginalElement>
   <nodes>
-    <node x="469.63095238095246" y="166.0">java.util.List</node>
     <node x="66.85000000000002" y="166.0">java.util.AbstractCollection</node>
+    <node x="469.63095238095246" y="166.0">java.util.List</node>
     <node x="165.50595238095246" y="362.0">java.util.Vector</node>
     <node x="317.13095238095246" y="83.0">java.util.Collection</node>
     <node x="221.63095238095246" y="269.0">java.util.AbstractList</node>
@@ -40,6 +40,10 @@
       <point x="487.63095238095246" y="239.0" />
       <point x="-24.0" y="16.5" />
     </edge>
+    <edge source="java.util.Stack" target="java.util.Vector">
+      <point x="0.0" y="-16.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
     <edge source="sun.awt.util.IdentityLinkedList" target="java.util.Collection">
       <point x="70.0" y="-16.5" />
       <point x="995.6" y="342.0" />
@@ -47,10 +51,6 @@
       <point x="947.4869047619048" y="136.0" />
       <point x="437.88095238095246" y="136.0" />
       <point x="51.75" y="16.5" />
-    </edge>
-    <edge source="java.util.Stack" target="java.util.Vector">
-      <point x="0.0" y="-16.5" />
-      <point x="0.0" y="16.5" />
     </edge>
     <edge source="sun.awt.util.IdentityLinkedList" target="java.util.AbstractList">
       <point x="-70.0" y="-16.5" />
@@ -124,20 +124,20 @@
       <point x="523.6309523809525" y="249.0" />
       <point x="12.0" y="16.5" />
     </edge>
-    <edge source="java.util.ArrayList" target="java.util.AbstractList">
-      <point x="-32.25" y="-16.5" />
-      <point x="450.98690476190484" y="342.0" />
-      <point x="299.63095238095246" y="342.0" />
-      <point x="0.0" y="16.5" />
-    </edge>
     <edge source="java.util.AbstractCollection" target="java.util.Collection">
       <point x="0.0" y="-16.5" />
       <point x="171.85000000000002" y="146.0" />
       <point x="368.88095238095246" y="146.0" />
       <point x="-17.25" y="16.5" />
     </edge>
+    <edge source="java.util.ArrayList" target="java.util.AbstractList">
+      <point x="-32.25" y="-16.5" />
+      <point x="450.98690476190484" y="342.0" />
+      <point x="299.63095238095246" y="342.0" />
+      <point x="0.0" y="16.5" />
+    </edge>
   </edges>
-  <settings layout="Hierarchic Group" zoom="1.0" x="308.5" y="219.0" />
+  <settings layout="Hierarchic Group" zoom="1.0" x="515.5" y="239.0" />
   <SelectedNodes>
     <node>sun.awt.util.IdentityArrayList</node>
   </SelectedNodes>
