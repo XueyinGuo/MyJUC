@@ -8,23 +8,33 @@ package com.szu.thread;
 
 import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.ConcurrentSkipListMap;
+import java.util.concurrent.*;
 
 public class testqueue {
 
     public static void main(String[] args) throws InterruptedException {
-        PriorityQueue priorityQueue = new PriorityQueue();
-        priorityQueue.add(1);
-        priorityQueue.add(6);
-        priorityQueue.add(5);
-        priorityQueue.add(7);
-        priorityQueue.add(8);
-        priorityQueue.add(18);
-        priorityQueue.add(0);
+        LinkedTransferQueue<Integer> objects = new LinkedTransferQueue<>();
 
-        while(!priorityQueue.isEmpty()){
-            System.out.println(priorityQueue.poll());
+
+
+        for (int i = 0; i < 100; i++) {
+            new Thread(()->{
+                try {
+                    objects.take();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+
+
+        for (int i = 0; i < 100; i++) {
+            int finalI = i;
+            new Thread(()->{
+
+                objects.put(finalI);
+
+            }, "t"+i).start();
         }
     }
 }
