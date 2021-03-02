@@ -10,7 +10,6 @@ import java.util.concurrent.Executor;
 
 public class L42_Executor implements Executor {
 
-    Runnable task;
 
     @Override
     public void execute(Runnable command) {
