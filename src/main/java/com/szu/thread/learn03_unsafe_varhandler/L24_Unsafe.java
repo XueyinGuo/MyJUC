@@ -8,20 +8,20 @@ package com.szu.thread.learn03_unsafe_varhandler;
  * @Date 2021/2/7 18:01
  */
 
-import sun.misc.Unsafe;
-
-public class L24_Unsafe {
-    static class M{
-        private M(){}
-
-        int i = 0;
-    }
-
-    public static void main(String[] args) throws Exception {
-        Unsafe unsafe = Unsafe.getUnsafe();
-        M m = (M) unsafe.allocateInstance(M.class);
-        m.i = 100;
-        System.out.println(m.i);
-    }
-
-}
+//import sun.misc.Unsafe;
+//
+//public class L24_Unsafe {
+//    static class M{
+//        private M(){}
+//
+//        int i = 0;
+//    }
+//
+//    public static void main(String[] args) throws Exception {
+//        Unsafe unsafe = Unsafe.getUnsafe();
+//        M m = (M) unsafe.allocateInstance(M.class);
+//        m.i = 100;
+//        System.out.println(m.i);
+//    }
+//
+//}
