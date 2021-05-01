@@ -21,6 +21,9 @@ package com.szu.thread.learn02_sync_and_volatile;
  * @Date 2021/2/7 15:37
  */
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class L16_Volatile_Instruction_Reorder {}
 
 /*
@@ -28,7 +31,7 @@ public class L16_Volatile_Instruction_Reorder {}
 * */
 class SingletonLazyInit{
 
-    private /* volatile */ SingletonLazyInit instance;
+    public static /* volatile */ SingletonLazyInit instance;
 
     Object lock = new Object();
 
@@ -43,6 +46,25 @@ class SingletonLazyInit{
             }
         }
         return instance;
+    }
+
+    public static void main(String[] args) {
+        SingletonLazyInit singletonLazyInit = new SingletonLazyInit();
+        List<SingletonLazyInit> list = new ArrayList<>();
+
+        for (;;) {
+            new Thread(()->{
+                if (!list.isEmpty()){
+                    list.remove(0);
+                    list.add(instance);
+                }
+            }).start();
+            if (!list.isEmpty())
+                if (instance != list.get(0))
+                    System.out.println("FUCK");
+
+            instance = null;
+        }
     }
 
 }
