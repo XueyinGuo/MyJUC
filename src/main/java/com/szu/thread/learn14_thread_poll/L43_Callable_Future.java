@@ -11,7 +11,7 @@ import java.util.concurrent.*;
 public class L43_Callable_Future {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
-        ScheduledExecutorService pool = Executors.newScheduledThreadPool(5);
+        ExecutorService pool = Executors.newFixedThreadPool(5);
 
         Callable callable = ()->{
 
@@ -21,6 +21,14 @@ public class L43_Callable_Future {
         Future future = pool.submit(callable);
 
         System.out.println(future.get());
+        pool.shutdown();
+
+        new Callable<Integer>() {
+            @Override
+            public Integer call() throws Exception {
+                return 10;
+            }
+        };
     }
 
 }

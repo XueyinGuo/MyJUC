@@ -24,7 +24,7 @@ public class L05_Join {
             try {
                 for (int i = 0; i < 1000; i++) {
                     if (i % 100 == 0){
-                        Thread.sleep(10);
+                        Thread.sleep(1000);
                         System.out.println("t2 is still runing");
                     }
                 }

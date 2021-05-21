@@ -15,10 +15,10 @@ public class L38_ThreadLocal {
     static ThreadLocal<Star> threadLocal = new ThreadLocal<Star>();
 
     public static void main(String[] args) {
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 Thread.sleep(3000);
-                System.out.println(Thread.currentThread().getName()+"  "+threadLocal.get());
+                System.out.println(Thread.currentThread().getName() + "  " + threadLocal.get());
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -26,11 +26,11 @@ public class L38_ThreadLocal {
         }, "t1").start();
 
         /* t2 往自己的map中设置值， t1当然访问不到 */
-        new Thread(()->{
+        new Thread(() -> {
             try {
                 threadLocal.set(new Star());
                 Thread.sleep(5000);
-                System.out.println(Thread.currentThread().getName()+"  "+threadLocal.get());
+                System.out.println(Thread.currentThread().getName() + "  " + threadLocal.get());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -38,6 +38,7 @@ public class L38_ThreadLocal {
     }
 
 }
+
 class Star {
 
     String name = "The Falling star!";

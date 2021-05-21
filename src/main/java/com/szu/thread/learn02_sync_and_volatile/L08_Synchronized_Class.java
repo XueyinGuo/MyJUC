@@ -11,7 +11,7 @@ public class L08_Synchronized_Class {
 
 
     private static int count = 10;
-
+    /* 这里带了 static */
     public synchronized static void m() { //这里等同于synchronized(L08_Synchronized_Class.class)
         count--;
         System.out.println(Thread.currentThread().getName() + " count = " + count);

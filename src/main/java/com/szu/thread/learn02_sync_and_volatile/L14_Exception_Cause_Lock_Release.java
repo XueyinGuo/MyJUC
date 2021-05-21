@@ -24,8 +24,15 @@ public class L14_Exception_Cause_Lock_Release {
                     int i = 1 / 0;  //此处抛出异常，锁将被释放，
                 }
             }
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println( Thread.currentThread().getName() + "异常睡觉咯");
+            try {
+                Thread.sleep(5000);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+            System.out.println( Thread.currentThread().getName() +"睡醒了");
         }
     }
 

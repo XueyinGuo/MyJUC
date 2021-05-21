@@ -23,8 +23,8 @@ public class L42_Executor implements Executor {
         L42_Executor test = new L42_Executor();
 
         Runnable task = ()->{
-//            System.out.println("就这？");
-            System.out.println("This is it?");
+            System.out.println("就这？");
+//            System.out.println("This is it?");
         };
 
         test.execute(task);

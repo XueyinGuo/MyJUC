@@ -3,6 +3,9 @@ package com.szu.thread.learn01_threads;
  * @Author 郭学胤
  * @University 深圳大学
  * @Description
+ *
+ * 线程被打断之后，不会立马释放锁，也得执行完打断之后的逻辑才释放
+ *
  * @Date 2021/2/9 20:11
  */
 
@@ -12,7 +15,7 @@ public class L06_interrupt {
 
     ReentrantLock lock = new ReentrantLock();
 
-    public  void m1(){
+    public void m1(){
 
             try {
                 lock.lock();
@@ -21,6 +24,11 @@ public class L06_interrupt {
                 System.out.println(Thread.currentThread().getName()+ " wake up");
             } catch (InterruptedException e) {
                 System.out.println(Thread.currentThread().getName()+ " has been interrupted ");
+                try {
+                    Thread.sleep(3000);
+                } catch (InterruptedException interruptedException) {
+                    interruptedException.printStackTrace();
+                }
             }finally {
                 lock.unlock();
             }
