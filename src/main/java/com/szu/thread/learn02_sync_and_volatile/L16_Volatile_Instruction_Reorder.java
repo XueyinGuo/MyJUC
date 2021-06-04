@@ -73,41 +73,61 @@ class SingletonLazyInit {
 
     public static void setInstanceNull() {
         synchronized (lock) {
-            instance = null;
+            if (instance != null)
+                instance = null;
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
 
         List<SingletonLazyInit> list = new ArrayList<>();
+        Util util = new Util();
 
         /* 不断获取 instance，放入 list 中，如果list不为空就先不往里放了 */
         new Thread(() -> {
-            synchronized (list) {
-                if (list.isEmpty()) {
-                    SingletonLazyInit instanceLazy = SingletonLazyInit.getInstanceLazy();
-                    list.add(instanceLazy);
+            while (true) {
+                synchronized (list) {
+                    if (list.isEmpty()) {
+                        SingletonLazyInit instanceLazy = SingletonLazyInit.getInstanceLazy();
+                        list.add(instanceLazy);
+                    }
                 }
             }
         }).start();
+
         /* 只要list 不空，就取出来，看看是否发生了指令重拍，如果发生了重拍，而且把重排完之后的没调用构造方法的 instance 赋值回主存，那么 num 的值必为 0 */
         new Thread(() -> {
-            synchronized (list) {
-                if (!list.isEmpty()) {
-                    SingletonLazyInit remove = list.remove(0);
-                    if (remove != null && remove.num == 0)
-                        System.out.println("FUCK");
+            while (true) {
+                synchronized (list) {
+                    if (!list.isEmpty()) {
+                        SingletonLazyInit remove = list.remove(0);
+                        if (remove != null && remove.num == 0)
+                            System.out.println("FUCK");
+
+                        util.nulled = false;
+                    }
                 }
             }
         }).start();
 
-
         while (true) {
-            setInstanceNull();
+//            Thread.sleep(5);
+            synchronized (list) {
+            if (list.isEmpty() && !util.nulled) {
+                    util.nulled = true;
+                    setInstanceNull();
+                }
+
+            }
+
         }
     }
 
+}
+
+class Util {
+    volatile boolean nulled = true;
 }
 
 /*
