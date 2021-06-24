@@ -33,6 +33,7 @@ https://blog.csdn.net/XueyinGuo/article/details/110913371
 > Reorder_test.java 那个小程序跑了一整下午还没遇见错误
 
 # 5. `volatile`是如何保证不会指令重排序的
+### [请看本人博客](https://blog.csdn.net/XueyinGuo/article/details/110920020?spm=1001.2014.3001.5501)
 
 
 # 6. CAS 的 ABA 问题

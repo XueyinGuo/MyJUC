@@ -39,6 +39,9 @@ public class Reorder_test {
 }
 class Test{
 
-    int num = 10;
+    int num;
 
+    public Test() {
+        this.num = 10;
+    }
 }

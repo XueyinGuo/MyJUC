@@ -5,16 +5,13 @@ package com.szu.thread.learn14_thread_poll;/*
  * @Date 2021/2/17 21:28
  */
 
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.FutureTask;
+import java.util.concurrent.*;
 
 public class L45_FutureTask {
 
     public static void main(String[] args) throws ExecutionException, InterruptedException {
 
-        ExecutorService executorService = Executors.newFixedThreadPool(5);
+        ExecutorService pool = Executors.newFixedThreadPool(5);
 
         /*
         *
@@ -30,7 +27,15 @@ public class L45_FutureTask {
             return "This is it?";
         } );
 
-        executorService.submit(futureTask);
+        Future<?> future = pool.submit(futureTask);
+        System.out.println(future.get());
+
+        pool.submit(new Runnable() {
+            @Override
+            public void run() {
+
+            }
+        });
 
         System.out.println(futureTask.get());
 

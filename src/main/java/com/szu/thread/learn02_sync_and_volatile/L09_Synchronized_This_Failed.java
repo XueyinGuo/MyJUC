@@ -1,13 +1,14 @@
 package com.szu.thread.learn02_sync_and_volatile;
+
 /*
-* Thread 模拟营业大厅叫号机程序
-*
-* 只有 500 个号码，三个机器去抢
-* */
-public class L09_Synchronized_This_Failed extends  Thread{
+ * Thread 模拟营业大厅叫号机程序
+ *
+ * 只有 50 个号码，三个机器去抢
+ * */
+public class L09_Synchronized_This_Failed extends Thread {
 
     private final String name;
-    private static final int MAX = 500;
+    private static final int MAX = 50;
     private static int index = 1;
 
     public L09_Synchronized_This_Failed(String name) {
@@ -15,13 +16,13 @@ public class L09_Synchronized_This_Failed extends  Thread{
     }
 
     /*
-    * 锁 this， 只是锁的调用这个类中方法的那个对象（本例中是三个线程分别锁了 m1 m2 m3），不存在锁的争抢情况
-    *
-    * 打开 static 之后 三个线程都是去抢 本类在堆中的class对象 那把锁
-    * */
-    public /* static */ synchronized void print(){
-        while(index <= MAX){
-            System.out.println(" 当前号码： " + index);
+     * 锁 this， 只是锁的调用这个类中方法的那个对象（本例中是三个线程分别锁了 m1 m2 m3），不存在锁的争抢情况
+     *
+     * 打开 static 之后 三个线程都是去抢 本类在堆中的class对象 那把锁
+     * */
+    public  static  synchronized void print() {
+        while (index <= MAX) {
+            System.out.println(" current num: " + index);
             index++;
         }
     }

@@ -10,7 +10,7 @@ public class L23_Do_Not_Lock_String {
 
     String s1 = "SZU";
     String s2 = "SZU";
-    /* m1 锁 s1 ,但是只有一个方法能进去*/
+    /* m1 锁 s1 ,但是只有一个方法能进去 */
     void m1(){
         synchronized (s1){
             try {
